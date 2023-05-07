@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDoCrudApp</string>
+    <string name="app_name">To Do Crud App</string>
     <string name="save">Save</string>
     <string name="enter_a_task">Enter a task</string>
     <string name="add">Add Task</string>

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.demo.todocrudapp.ui.home.TodoFragment"
-        android:label="To_Do_List"
+        android:label="ToDo Crud App"
         tools:layout="@layout/fragment_todo">
         <action
             android:id="@+id/action_todoFragment_to_todoAddFragment"

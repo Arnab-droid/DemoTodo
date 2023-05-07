@@ -56,12 +56,12 @@ class TodoAdapter(private val listener: TodoFragment):
                     }
 
                 }
-                root.rootView.setOnLongClickListener {
+               /* root.rootView.setOnLongClickListener {
                     currTodo?.let { todo ->
                         listener.callTodoDialog(todo)
                     }
                     true
-                }
+                }*/
             }
         }
 

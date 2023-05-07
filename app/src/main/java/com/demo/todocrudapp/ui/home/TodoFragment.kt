@@ -83,7 +83,8 @@ class TodoFragment : Fragment(), TodoEvents {
                 }
             }
         }
-
+        //Not Included in first task
+/*
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -99,8 +100,12 @@ class TodoFragment : Fragment(), TodoEvents {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val currTodo = todoAdapter.currentList[position]
-                viewModel.deleteTodo(currTodo.id)
-                Snackbar.make(view, "Article deleted successfully", Snackbar.LENGTH_SHORT).apply {
+                currTodo?.let { todo ->
+                    callTodoDialog(todo)
+                }
+                true
+               // viewModel.deleteTodo(currTodo.id)
+                Snackbar.make(view, "Are you sure you want to delete? ", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo"){
                         viewModel.insertTodo(currTodo.name)
                     }
@@ -112,7 +117,7 @@ class TodoFragment : Fragment(), TodoEvents {
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(listRecyclerView)
         }
-
+*/
         binding.btnAddTodo.setOnClickListener {
             val action = TodoFragmentDirections.actionTodoFragmentToTodoAddFragment(
                 getString(R.string.add), TodoTasks()
@@ -122,12 +127,12 @@ class TodoFragment : Fragment(), TodoEvents {
     }
 
     private fun showTodoDialog(todo: TodoTasks) {
-        val options = arrayOf("Edit","Delete")
+        val options = arrayOf("Delete")
         MaterialAlertDialogBuilder(requireContext())
             .setCancelable(true)
             .setItems(options){ _,which ->
                 when(options[which]){
-                    "Edit" -> onTodoEdit(todo)
+
                     "Delete" -> viewModel.deleteTodo(todo.id)
                 }
             }
@@ -142,6 +147,8 @@ class TodoFragment : Fragment(), TodoEvents {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
+        todoAdapter.notifyDataSetChanged()
+
     }
 
     private fun setToolbar() {
