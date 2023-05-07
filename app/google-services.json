@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831234083138",
+    "project_id": "demotodo-edae1",
+    "storage_bucket": "demotodo-edae1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831234083138:android:46f4793c8d8a101406e0db",
+        "android_client_info": {
+          "package_name": "com.demo.todocrudapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831234083138-910fl48cac14scdmk4sl16beud9k41oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demo.todocrudapp",
+            "certificate_hash": "d25a41052a7ef4b544098b510943f159bf828d74"
+          }
+        },
+        {
+          "client_id": "831234083138-n577pr0jn6daht3uk7eb54uva6p7ekgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNAqZ8IibSVJpNLkyT3L8Fq2iah-nSSwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831234083138-n577pr0jn6daht3uk7eb54uva6p7ekgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
