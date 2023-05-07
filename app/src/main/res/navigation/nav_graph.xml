@@ -17,6 +17,26 @@
                 android:name="todo_id"
                 android:defaultValue="-1" />
         </action>
+
+        <action
+            android:id="@+id/action_todoFragment_to_detailTaskFragment"
+            app:destination="@id/detailTaskFragment" >
+
+            <argument
+                android:name="title"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+
+            <argument
+                android:name="data"
+                android:defaultValue="@null"
+                app:argType="com.demo.todocrudapp.data.network.model.TodoTasks"
+                app:nullable="true" />
+
+        </action>
+
+
     </fragment>
     <fragment
         android:id="@+id/todoAddFragment"
@@ -66,5 +86,22 @@
         app:destination="@id/todoFragment"
         app:popUpTo="@id/signInFragment"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/detailTaskFragment"
+        android:name="com.demo.todocrudapp.ui.todo_detail.DetailTaskFragment"
+        android:label="fragment_detail_task"
+        tools:layout="@layout/fragment_detail_task">
+        <argument
+            android:name="title"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
 
+        <argument
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.demo.todocrudapp.data.network.model.TodoTasks"
+            app:nullable="true" />
+
+    </fragment>
 </navigation>

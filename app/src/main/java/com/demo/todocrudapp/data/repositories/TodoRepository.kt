@@ -1,9 +1,11 @@
 package com.demo.todocrudapp.data.repositories
 
 import com.demo.todocrudapp.data.network.model.Response
+import com.demo.todocrudapp.data.network.model.TodoDetailTasks
 import com.demo.todocrudapp.data.network.model.TodoTasks
 import com.demo.todocrudapp.data.network.model.User
 import com.demo.todocrudapp.util.Constants.Companion.TODOS
+import com.demo.todocrudapp.util.Constants.Companion.TODOs_DETAILS
 import com.demo.todocrudapp.util.Constants.Companion.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,7 +44,22 @@ class TodoRepository @Inject constructor(
             snapshotListener.remove()
         }
     }
+    fun getTodoDetails(taskid:String)=callbackFlow {
+        val userTodosDetails = db.collection(TODOs_DETAILS).document(taskid)
 
+        val snapshotListener = userTodosDetails.addSnapshotListener { snapshot, e ->
+            val todoResponse = if (snapshot != null) {
+                val todosDetails = snapshot.toObject(TodoDetailTasks::class.java)
+                Response.Success(todosDetails)
+            } else {
+                Response.Error(e)
+            }
+            trySend(todoResponse)
+        }
+        awaitClose {
+            snapshotListener.remove()
+        }
+    }
     suspend fun insertTodo(todoName: String) {
         val userId = auth.currentUser!!.uid
         val todoId = db.collection(TODOS).document().id
@@ -59,6 +76,24 @@ class TodoRepository @Inject constructor(
             val todo = TodoTasks(todoId, todoName,
                 strDate, currentUser!!)
             todoDocument.set(todo).await()
+        }
+    }
+    suspend fun insertTodoDetails(todoId: String,todoName: String,todoDetailTasks: String,txtType:Int) {
+        val userId = auth.currentUser!!.uid
+        val todoIdConnected = db.collection(TODOS).document(todoId)
+        val user = db.collection(USERS).document(userId)
+        val todoDetailsDocument = db.collection(TODOs_DETAILS).document(todoId)
+
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+        val date = Date()
+        val strDate: String = dateFormat.format(date).toString()
+
+
+        withContext(defaultDispatcher) {
+            val currentUser = user.get().await().toObject<User>()
+            val todoDetails = TodoDetailTasks(todoId, todoName,todoDetailTasks,
+                strDate, currentUser!!,txtType)
+            todoDetailsDocument.set(todoDetails).await()
         }
     }
 

@@ -3,7 +3,13 @@
     <style name="TextOnScreen">
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
+    <style name="SpinnerThemexx" parent="android:Widget.Material.Spinner.Underlined">
+        <item name="android:popupBackground">@drawable/rounded_drop_down
+        </item>
 
+
+        <item name="android:textAlignment">textStart</item>
+    </style>
     <style name="Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">32sp</item>
